@@ -33,3 +33,11 @@ class LinkedList():
 
     def __eq__(self, x):
         return self.__str__() == x.__str__()
+
+    def find(self, n):
+        node = self.head
+        while node != None:
+            if node.data == n:
+                return node
+            node = node.next
+        return None
