@@ -32,6 +32,7 @@ class LinkedList():
         return s
 
     def __eq__(self, x):
+        print(f'{self} compare {x}')
         return self.__str__() == x.__str__()
 
     def find(self, n):
