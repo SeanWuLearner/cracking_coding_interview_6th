@@ -1,19 +1,36 @@
 
+# solution to split matrix into 4 blocks
+# def rotate_matrix(q):
+#     n = len(q)
+#     n_2ceil = int( (n+1) / 2)
+#     n_2floor = int( n / 2)
+
+#     for i in range(n_2ceil):
+#         for j in range(0, n_2floor):
+#             q[i][j], q[n-1-j][i], q[n-1-i][n-1-j], q[j][n-1-i] = q[n-1-j][i], q[n-1-i][n-1-j], q[j][n-1-i], q[i][j]
+
+#     return q
+
+# solution to do it layer by layer
 def rotate_matrix(q):
     n = len(q)
-    n_2ceil = int( (n+1) / 2)
-    n_2floor = int( n / 2)
 
-
-    for i in range(n_2ceil):
-        for j in range(0, n_2floor):
-            q[i][j], q[n-1-j][i], q[n-1-i][n-1-j], q[j][n-1-i] = q[n-1-j][i], q[n-1-i][n-1-j], q[j][n-1-i], q[i][j]
-
+    for layer in range(int(n/2)):
+        first = layer
+        last = n-1-layer
+        for i in range(first, last):
+            offset = i - first
+            # keep top
+            temp = q[first][i]
+            # left to top
+            q[first][i] = q[last-offset][first]
+            # bottom to left
+            q[last-offset][first] = q[last][last-offset]
+            # right to bottom
+            q[last][last-offset] = q[i][last]
+            # top(temp) to right
+            q[i][last] = temp
     return q
-
-
-
-
 
 
 def test_func():
