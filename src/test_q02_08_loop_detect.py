@@ -4,14 +4,9 @@ def find_loop(l):
     if l.head == None:
         return None
 
-    slow = l.head
-    fast = slow.next
-
     # confirm whether there is a loop first
+    fast = slow = l.head
     while True:
-        if fast is slow:
-            break
-
         if fast is None:
             return None
         fast = fast.next
@@ -20,8 +15,9 @@ def find_loop(l):
         fast = fast.next
         slow = slow.next
 
-    print(f'meet at {slow.data}')
-    return slow
+        if fast is slow:
+            break
+
     # find the loop node
     n1 = slow
     n2 = l.head
@@ -46,4 +42,3 @@ def test_func():
     loop_node = l.find(4)
     end_node.next = loop_node
     assert find_loop(l) == loop_node
-
