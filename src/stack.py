@@ -24,3 +24,6 @@ class Stack():
 
     def is_full(self):
         return len(self._buf) == self._cap
+
+    def __str__(self):
+        return str(self._buf)
