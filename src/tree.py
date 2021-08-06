@@ -59,6 +59,15 @@ class TreeNode():
     def childs(self):
         return [self.left, self.right]
 
+    @property
+    def height(self):
+        def helper(node):
+            if node == None:
+                return 0
+            l_height = helper(node.left)
+            r_height = helper(node.right)
+            return 1 + max(l_height, r_height)
+        return helper(self)
 
 def test_tree():
     N = None
@@ -66,6 +75,7 @@ def test_tree():
     node = TreeNode.create_tree(l)
     node.draw()
     print(node)
+    print(f'height = {node.height}')
 
 if __name__ == "__main__":
     test_tree()
