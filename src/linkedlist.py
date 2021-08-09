@@ -7,6 +7,7 @@ class Node():
 class LinkedList():
 
     def __init__(self, datas):
+        self.len = len(datas)
         self.head = self._build(datas)
 
     def _build(self, datas):
@@ -42,3 +43,6 @@ class LinkedList():
                 return node
             node = node.next
         return None
+
+    def __len__(self):
+        return self.len
