@@ -57,7 +57,7 @@ class TreeNode():
 
     @property
     def childs(self):
-        return [self.left, self.right]
+        return [self.right, self.left]
 
     @property
     def height(self):
