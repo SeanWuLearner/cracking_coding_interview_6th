@@ -1,14 +1,15 @@
 
 class TreeNode():
-    def __init__(self, val, left=None, right=None):
+    def __init__(self, val, left=None, right=None, parent=None):
         self.val = val
         self.left = left
         self.right = right
+        self.parent = parent
 
     @staticmethod
     def create_tree(preorder_list):
         '''Return the root tree node according to given preorder list'''
-        def helper():
+        def helper(parent):
             try:
                 val = next(vals)
             except:
@@ -16,12 +17,22 @@ class TreeNode():
             if val == None:
                 return None
 
-            node = TreeNode(val)
-            node.left = helper()
-            node.right = helper()
+            node = TreeNode(val, parent=parent)
+            node.left = helper(node)
+            node.right = helper(node)
             return node
         vals = iter(preorder_list)
-        return helper()
+        return helper(None)
+
+    def find_node(self, val):
+        def helper(node):
+            if node == None:
+                return None
+            if node.val == val:
+                return node
+            res_l = helper(node.left)
+            return helper(node.right) if res_l == None else res_l
+        return helper(self)
 
     def __str__(self):
         '''Return the preorder list of this node'''
